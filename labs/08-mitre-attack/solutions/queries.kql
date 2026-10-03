@@ -1,0 +1,3 @@
+DeviceEvents
+| where ActionType in ("ProcessCreated", "OpenProcessType", "RegistryValueSet", "FileCreated")
+| summarize Count = count() by ActionType

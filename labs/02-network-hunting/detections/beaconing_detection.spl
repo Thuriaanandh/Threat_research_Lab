@@ -1,0 +1,7 @@
+# Production Splunk Beaconing Detection
+index=network sourcetype="zeek:conn"
+| sort 0 id_orig_h, id_resp_h, _time
+| streamstats current=f window=1 last(_time) as prev_time by id_orig_h, id_resp_h
+| eval delta=_time - prev_time
+| stats count avg(delta) as avg_interval var(delta) as variance by id_orig_h, id_resp_h, id_resp_p
+| where count >= 5 AND variance < 1.0 AND id_resp_p=443

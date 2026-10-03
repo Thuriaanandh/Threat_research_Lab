@@ -1,0 +1,7 @@
+# Office Spawning CLI Processes
+index=endpoint sourcetype="XmlWinEventLog:Microsoft-Windows-Sysmon/Operational" EventCode=1
+    ParentImage IN ("*\\winword.exe", "*\\excel.exe", "*\\powerpnt.exe")
+    Image IN ("*\\powershell.exe", "*\\cmd.exe", "*\\wscript.exe", "*\\cscript.exe")
+| stats count min(_time) as first_seen max(_time) as last_seen by Computer, User, ParentImage, Image, CommandLine
+| eval duration=last_seen-first_seen
+| table Computer, User, ParentImage, Image, CommandLine, count

@@ -1,0 +1,6 @@
+// KQL Detection for DNS Tunneling
+DnsEvents
+| where QueryType == "TXT"
+| extend Subdomain = tostring(split(Name, ".")[0])
+| where strlen(Subdomain) > 15
+| project TimeGenerated, ClientIP, Name, Subdomain

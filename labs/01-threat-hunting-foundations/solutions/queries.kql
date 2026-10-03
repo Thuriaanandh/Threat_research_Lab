@@ -1,0 +1,12 @@
+// KQL Hunting Queries for Lab 01
+// 1. Identify after-hours user logins
+SecurityEvent
+| where EventID == 4624 and LogonType == 2
+| where hourofday(TimeGenerated) between (0 .. 6)
+| project TimeGenerated, Computer, Account, LogonType
+
+// 2. Correlate user process execution
+DeviceProcessEvents
+| where AccountName == "jdoe"
+| project Timestamp, DeviceName, FileName, ProcessCommandLine
+| sort by Timestamp asc

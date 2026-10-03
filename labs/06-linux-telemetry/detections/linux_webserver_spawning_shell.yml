@@ -1,0 +1,22 @@
+title: Web Server Spawning Interactive Shell
+id: 871029ba-1049-410a-9812-7819ab2301fa
+status: production
+description: Detects Linux web server accounts spawning interactive shells.
+author: Threat Research Lab
+date: 2026-10-03
+logsource:
+  category: process_creation
+  product: linux
+detection:
+  selection:
+    User:
+      - 'www-data'
+      - 'apache'
+    Image|endswith:
+      - '/bin/bash'
+      - '/bin/sh'
+  condition: selection
+level: critical
+tags:
+  - attack.execution
+  - attack.t1059.004

@@ -1,0 +1,18 @@
+title: Suspicious JA3 Hash Communicating with Self-Signed Certificate
+id: b12847a9-3901-447a-9a88-2891bb3a0109
+status: production
+description: Detects encrypted outbound HTTPS connections exhibiting known malicious JA3 signatures and self-signed certificate issuers.
+author: Threat Research Lab
+date: 2026-10-03
+logsource:
+  category: network_traffic
+  product: proxy
+detection:
+  selection:
+    ja3: '6734f3743167022204a700501aabc052'
+    cert_issuer|contains: 'SelfSigned'
+  condition: selection
+level: high
+tags:
+  - attack.command_and_control
+  - attack.t1071.001

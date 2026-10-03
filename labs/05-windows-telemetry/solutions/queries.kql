@@ -1,0 +1,2 @@
+DeviceProcessEvents
+| where InitiatingProcessFileName has "winword.exe" and FileName has "powershell.exe"

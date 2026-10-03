@@ -1,0 +1,4 @@
+// Capstone Multi-Source Correlated Query
+DeviceProcessEvents
+| where InitiatingProcessFileName has "winword.exe"
+| project Timestamp, DeviceName, FileName, ProcessCommandLine

@@ -1,0 +1,18 @@
+title: Validated Detection as Code Rule
+id: a1029410-4819-410a-8912-7819ab230111
+status: production
+description: Validated via automated CI/CD pipeline.
+author: Threat Research Lab
+date: 2026-10-03
+logsource:
+  category: process_creation
+  product: windows
+detection:
+  selection:
+    Image|endswith: '\cmd.exe'
+    CommandLine|contains: '/c whoami'
+  condition: selection
+level: medium
+tags:
+  - attack.discovery
+  - attack.t1033

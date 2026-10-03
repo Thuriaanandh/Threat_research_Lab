@@ -1,0 +1,2 @@
+index=linux sourcetype="auditd" exe="/bin/bash" uid=33
+| table _time, host, exe, a2

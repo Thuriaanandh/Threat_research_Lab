@@ -1,0 +1,23 @@
+title: Suspicious Encoded PowerShell Execution
+id: 9a380be4-2191-4e78-9588-e56da3fa55b1
+status: production
+description: Detects PowerShell launched with hidden window and encoded command arguments.
+author: Threat Research Lab
+date: 2026-10-03
+logsource:
+  category: process_creation
+  product: windows
+detection:
+  selection:
+    Image|endswith: '\powershell.exe'
+    CommandLine|contains:
+      - '-NoP'
+      - '-Enc'
+      - '-Hidden'
+  condition: selection
+falsepositives:
+  - Rare deployment scripts; tune by parent image or signing status.
+level: high
+tags:
+  - attack.execution
+  - attack.t1059.001

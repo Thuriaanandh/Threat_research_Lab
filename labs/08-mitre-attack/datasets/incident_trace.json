@@ -1,0 +1,42 @@
+[
+  {
+    "step": 1,
+    "raw_action": "Victim opened email invoice.zip containing LNK file",
+    "tactic": "Initial Access"
+  },
+  {
+    "step": 2,
+    "raw_action": "LNK file executed powershell.exe to download implant",
+    "tactic": "Execution"
+  },
+  {
+    "step": 3,
+    "raw_action": "Implant modified registry Run key for persistence",
+    "tactic": "Persistence"
+  },
+  {
+    "step": 4,
+    "raw_action": "Implant executed whoami and net localgroup administrators",
+    "tactic": "Discovery"
+  },
+  {
+    "step": 5,
+    "raw_action": "Implant read LSASS memory to extract cleartext passwords",
+    "tactic": "Credential Access"
+  },
+  {
+    "step": 6,
+    "raw_action": "Adversary connected to DC via PsExec using stolen credentials",
+    "tactic": "Lateral Movement"
+  },
+  {
+    "step": 7,
+    "raw_action": "Adversary encrypted sensitive files with .locked extension",
+    "tactic": "Impact"
+  },
+  {
+    "step": 8,
+    "raw_action": "Adversary exfiltrated archive to cloud storage",
+    "tactic": "Exfiltration"
+  }
+]

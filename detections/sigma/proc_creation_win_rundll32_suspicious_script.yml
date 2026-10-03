@@ -1,0 +1,27 @@
+title: Rundll32 Execution of Scripting Protocol Handlers
+id: f45091d3-4f9e-4e4b-9721-a39c4d9e030b
+status: production
+description: Detects execution of rundll32.exe calling scriptlet or mshtml handlers, indicative of LOLBAS exploitation.
+references:
+  - https://attack.mitre.org/techniques/T1218/011/
+author: Threat Research Lab
+date: 2026-10-03
+logsource:
+  category: process_creation
+  product: windows
+detection:
+  selection:
+    Image|endswith: '\rundll32.exe'
+    CommandLine|contains:
+      - 'javascript:'
+      - 'vbscript:'
+      - 'about:'
+      - 'mshtml'
+      - 'RunHTMLApplication'
+  condition: selection
+falsepositives:
+  - Extremely rare legacy intranet applications.
+level: high
+tags:
+  - attack.defense_evasion
+  - attack.t1218.011

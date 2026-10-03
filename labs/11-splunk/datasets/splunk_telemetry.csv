@@ -1,0 +1,5 @@
+_time,host,user,sourcetype,EventCode,CommandLine,dest_ip,bytes_out
+1700000000,WS-01,admin,WinEventLog:Security,4625,,,0
+1700000010,WS-01,admin,WinEventLog:Security,4624,,,0
+1700000020,WS-01,admin,XmlWinEventLog:Sysmon,1,powershell.exe -enc JAB...,,0
+1700000030,WS-01,admin,proxy,,,198.51.100.23,52428800

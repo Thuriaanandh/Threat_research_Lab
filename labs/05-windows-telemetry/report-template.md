@@ -1,0 +1,3 @@
+# Incident Report
+## Summary
+## Findings

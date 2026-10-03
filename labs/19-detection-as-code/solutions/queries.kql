@@ -1,0 +1,2 @@
+// KQL rule validation query
+DeviceEvents | summarize count() by ActionType

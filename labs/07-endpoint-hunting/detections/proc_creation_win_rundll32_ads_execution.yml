@@ -1,0 +1,18 @@
+title: Rundll32 Execution from Alternate Data Stream
+id: f18491a2-4819-4820-a812-7819ab382109
+status: production
+description: Detects rundll32 executing payloads located inside NTFS Alternate Data Streams.
+author: Threat Research Lab
+date: 2026-10-03
+logsource:
+  category: process_creation
+  product: windows
+detection:
+  selection:
+    Image|endswith: '\rundll32.exe'
+    CommandLine|contains: ':'
+  condition: selection
+level: critical
+tags:
+  - attack.defense_evasion
+  - attack.t1564.004

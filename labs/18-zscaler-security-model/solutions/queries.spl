@@ -1,0 +1,4 @@
+# Splunk ZIA Malware followed by ZPA Denial Correlation
+index=zscaler sourcetype="zscaler:zia" action="Blocked" threat_name!="None"
+| join user [search index=zscaler sourcetype="zscaler:zpa" action="Denied"]
+| table _time, user, client_ip, destination, threat_name, action

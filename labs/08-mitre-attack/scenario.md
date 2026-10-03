@@ -1,0 +1,2 @@
+# Scenario: Deconstructing the Cyber Kill Chain
+An incident post-mortem report (datasets/incident_trace.json) has been delivered to the threat research team. The report describes an adversary gaining access via spearphishing, performing discovery via Windows utilities, dumping credentials, moving laterally via SMB, and exfiltrating data to cloud storage. You must translate every recorded action into exact MITRE ATT&CK sub-techniques.

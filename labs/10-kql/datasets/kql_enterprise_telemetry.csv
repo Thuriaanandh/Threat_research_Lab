@@ -1,0 +1,6 @@
+Timestamp,DeviceName,User,ActionType,ProcessName,CommandLine,RemoteIP,RemotePort
+2026-10-03T12:00:00Z,WS-01,alice,LogonFailed,,,,
+2026-10-03T12:00:02Z,WS-01,alice,LogonFailed,,,,
+2026-10-03T12:00:05Z,WS-01,alice,LogonSuccess,,,,
+2026-10-03T12:05:00Z,WS-01,alice,ProcessCreate,powershell.exe,powershell.exe -w hidden -enc JAB...,,
+2026-10-03T12:06:00Z,WS-01,alice,NetworkConnect,powershell.exe,,198.51.100.42,443

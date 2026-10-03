@@ -1,0 +1,9 @@
+timestamp,client_ip,query_name,query_type,rcode,answers
+2026-10-03T10:00:00Z,192.168.10.88,www.google.com,A,NOERROR,142.250.190.46
+2026-10-03T10:01:00Z,192.168.10.88,login.microsoftonline.com,A,NOERROR,20.190.151.68
+2026-10-03T10:05:00Z,192.168.10.88,c2VjcmV0LWtleS0wMQ==.tunnel.c2server.org,TXT,NOERROR,ACK
+2026-10-03T10:05:01Z,192.168.10.88,YWRtaW46cGFzc3dvcmQxMjM=.tunnel.c2server.org,TXT,NOERROR,ACK
+2026-10-03T10:05:02Z,192.168.10.88,ZGF0YS1zdGFnaW5nLWNvbXBsZXRl.tunnel.c2server.org,TXT,NOERROR,ACK
+2026-10-03T10:10:00Z,192.168.10.88,xkz91kdsa0.dga-net.xyz,A,NXDOMAIN,
+2026-10-03T10:10:01Z,192.168.10.88,qlwmz81nc2.dga-net.xyz,A,NXDOMAIN,
+2026-10-03T10:10:02Z,192.168.10.88,p91ksmcnv4.dga-net.xyz,A,NXDOMAIN,

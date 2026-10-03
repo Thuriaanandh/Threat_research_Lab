@@ -1,0 +1,42 @@
+[
+  {
+    "EventID": 1,
+    "UtcTime": "2026-10-03 14:02:10.120",
+    "ProcessId": 4120,
+    "Image": "C:\\Program Files\\Microsoft Office\\root\\Office16\\WINWORD.EXE",
+    "CommandLine": "\"WINWORD.EXE\" /n \"report.docm\"",
+    "ParentImage": "C:\\Windows\\explorer.exe",
+    "User": "CORP\\rstone"
+  },
+  {
+    "EventID": 1,
+    "UtcTime": "2026-10-03 14:02:18.450",
+    "ProcessId": 5892,
+    "Image": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+    "CommandLine": "powershell.exe -w hidden -enc JABjAGwAaQ...",
+    "ParentImage": "C:\\Program Files\\Microsoft Office\\root\\Office16\\WINWORD.EXE",
+    "User": "CORP\\rstone"
+  },
+  {
+    "EventID": 11,
+    "UtcTime": "2026-10-03 14:02:20.100",
+    "Image": "powershell.exe",
+    "TargetFilename": "C:\\ProgramData\\update.exe",
+    "User": "CORP\\rstone"
+  },
+  {
+    "EventID": 10,
+    "UtcTime": "2026-10-03 14:02:25.800",
+    "SourceImage": "C:\\ProgramData\\update.exe",
+    "TargetImage": "C:\\Windows\\System32\\lsass.exe",
+    "GrantedAccess": "0x1010",
+    "User": "CORP\\rstone"
+  },
+  {
+    "EventID": 4698,
+    "UtcTime": "2026-10-03 14:02:30.000",
+    "TaskName": "\\DailyUpdateTask",
+    "TaskContent": "C:\\ProgramData\\update.exe",
+    "User": "CORP\\rstone"
+  }
+]

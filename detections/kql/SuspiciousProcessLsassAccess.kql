@@ -1,0 +1,6 @@
+// Sysmon LSASS Process Access
+DeviceEvents
+| where ActionType == "OpenProcess" or ActionType == "ProcessAccess"
+| where TargetImage has "lsass.exe"
+| where not(InitiatingProcessFileName in~ ("svchost.exe", "csrss.exe", "MsMpEng.exe"))
+| project Timestamp, DeviceName, InitiatingProcessFileName, TargetImage, AdditionalFields

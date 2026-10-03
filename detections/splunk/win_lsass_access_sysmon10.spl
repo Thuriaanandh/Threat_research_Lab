@@ -1,0 +1,6 @@
+# Suspicious LSASS Process Access via Sysmon Event ID 10
+index=endpoint sourcetype="XmlWinEventLog:Microsoft-Windows-Sysmon/Operational" EventCode=10
+    TargetImage="*\\lsass.exe"
+    NOT SourceImage IN ("*\\svchost.exe", "*\\csrss.exe", "*\\MsMpEng.exe")
+| stats count by Computer, SourceImage, GrantedAccess, CallTrace
+| sort - count

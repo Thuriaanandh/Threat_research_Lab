@@ -1,0 +1,4 @@
+timestamp,log_type,user,client_ip,destination,url_category,action,threat_name,ssl_inspected
+2026-10-03T19:00:00Z,ZIA,rstone@corp.com,10.0.1.45,https://onedrive.live.com,Cloud Storage,Allowed,None,Yes
+2026-10-03T19:05:00Z,ZIA,rstone@corp.com,10.0.1.45,https://update-service-c2.net/payload.exe,Newly Registered Domains,Blocked,Trojan.CobaltStrike,Yes
+2026-10-03T19:10:00Z,ZPA,rstone@corp.com,10.0.1.45,App-Server-Prod.internal:3389,Internal Application,Denied,Policy Unauthorized,N/A

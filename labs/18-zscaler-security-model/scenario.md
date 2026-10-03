@@ -1,0 +1,2 @@
+# Scenario: Zero Trust Threat Hunting
+Your enterprise utilizes the Zscaler Zero Trust Exchange. Rather than relying on static network firewalls, all corporate web traffic routes through Zscaler Internet Access (ZIA) with SSL inspection enabled, and all internal application access is mediated through Zscaler Private Access (ZPA) App Connectors. You must hunt through simulated ZIA Web Logs and ZPA Audit Logs to identify SSL inspection bypass attempts, unauthorized lateral application discovery, and malicious file downloads flagged by Cloud Sandbox.

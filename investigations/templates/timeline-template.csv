@@ -1,0 +1,4 @@
+timestamp_utc,hostname,user,process_image,command_line,parent_image,event_type,telemetry_source,significance,mitre_id
+2026-10-03T14:15:22Z,WS-FIN-01,CORP\jdoe,C:\Program Files\Microsoft Office\root\Office16\WINWORD.EXE,"WINWORD.EXE /n invoice.docm",C:\Windows\explorer.exe,Process Creation,Sysmon EID 1,Initial Execution,T1204.002
+2026-10-03T14:15:30Z,WS-FIN-01,CORP\jdoe,C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe,"powershell.exe -w hidden -enc JABjAGwAaQ...",C:\Program Files\Microsoft Office\root\Office16\WINWORD.EXE,Process Creation,Sysmon EID 1,Adversary C2 Download Cradle,T1059.001
+2026-10-03T14:15:35Z,WS-FIN-01,CORP\jdoe,C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe,"Destination: 198.51.100.42:443",C:\Program Files\Microsoft Office\root\Office16\WINWORD.EXE,Network Socket,Sysmon EID 3,Outbound External Connection,T1071.001

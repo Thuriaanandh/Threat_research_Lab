@@ -1,0 +1,69 @@
+// 15 Production KQL Hunting Queries
+// 1. Failed Logons Spike
+SecurityEvent
+| where EventID == 4625
+| summarize FailedCount = count() by Account, Computer, bin(TimeGenerated, 15m)
+| where FailedCount > 10
+
+// 2. Brute Force followed by Success
+let Failed = SecurityEvent | where EventID == 4625 | project FailedTime=TimeGenerated, Account, Computer;
+let Success = SecurityEvent | where EventID == 4624 | project SuccessTime=TimeGenerated, Account, Computer;
+Failed | join kind=inner (Success) on Account, Computer
+| where SuccessTime between (FailedTime .. (FailedTime + 10m))
+
+// 3. Encoded PowerShell
+DeviceProcessEvents
+| where FileName in~ ("powershell.exe", "pwsh.exe")
+| where ProcessCommandLine has_any ("-enc", "-EncodedCommand", "-e ")
+
+// 4. Rare Processes
+DeviceProcessEvents
+| summarize ExecutionCount = count() by FileName
+| where ExecutionCount < 3
+
+// 5. Office spawning CLI
+DeviceProcessEvents
+| where InitiatingProcessFileName in~ ("winword.exe", "excel.exe", "powerpnt.exe")
+| where FileName in~ ("cmd.exe", "powershell.exe", "wscript.exe")
+
+// 6. Rare External Connections
+DeviceNetworkEvents
+| where not(RemoteIP startswith "10." or RemoteIP startswith "192.168.")
+| summarize ConnCount = count() by RemoteIP
+| where ConnCount < 5
+
+// 7. Outbound Beaconing Delta
+DeviceNetworkEvents
+| sort by DeviceName, RemoteIP, Timestamp asc
+| extend PrevTime = prev(Timestamp, 1)
+| extend DeltaSeconds = datetime_diff('second', Timestamp, PrevTime)
+| summarize AvgDelta = avg(DeltaSeconds), StDevDelta = stdev(DeltaSeconds), Count=count() by RemoteIP
+| where Count > 20 and StDevDelta < 2
+
+// 8. Impossible Travel
+SigninLogs
+| project TimeGenerated, UserPrincipalName, IPAddress, Location
+| sort by UserPrincipalName, TimeGenerated asc
+| extend PrevLocation = prev(Location, 1), PrevTime = prev(TimeGenerated, 1)
+| where Location != PrevLocation and datetime_diff('minute', TimeGenerated, PrevTime) < 60
+
+// 9. Service Installation (7045)
+SecurityEvent | where EventID == 7045 | project TimeGenerated, Computer, ServiceName=EventData.ServiceName
+
+// 10. NTLM Downgrade / Pass-the-Hash
+SecurityEvent | where EventID == 4624 and AuthenticationPackageName == "NTLM" and LogonType == 3
+
+// 11. Member Added to Privileged Group
+SecurityEvent | where EventID in (4728, 4732, 4756) | project TimeGenerated, TargetUserName, MemberName
+
+// 12. LOLBAS Ingress
+DeviceProcessEvents | where FileName in~ ("certutil.exe", "bitsadmin.exe") and ProcessCommandLine has_any ("-urlcache", "/transfer")
+
+// 13. High-Entropy DNS
+DnsEvents | extend Subdomain = tostring(split(Name, ".")[0]) | where strlen(Subdomain) > 25
+
+// 14. S3 Exfiltration Burst
+AWSCloudTrail | where EventName == "GetObject" | summarize Count = count() by SourceIpAddress, bin(TimeGenerated, 10m) | where Count > 100
+
+// 15. Named Pipes Lateral Movement
+DeviceEvents | where ActionType == "NamedPipeCreated" and AdditionalFields has "psexec"

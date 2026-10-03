@@ -1,0 +1,4 @@
+index=endpoint sourcetype=sysmon Image="*\\powershell.exe"
+    NOT (ParentImage="*\\CcmExec.exe" OR CommandLine="*HealthCheck*")
+    (ParentImage IN ("*\\winword.exe", "*\\excel.exe") OR CommandLine="* -enc *")
+| stats count by Computer, User, ParentImage, CommandLine

@@ -1,0 +1,18 @@
+title: MITRE T1003.001 LSASS Process Access
+id: d1928410-1829-410a-b891-7819ab481091
+status: production
+description: Detects memory read access to LSASS process.
+author: Threat Research Lab
+date: 2026-10-03
+logsource:
+  category: process_access
+  product: windows
+detection:
+  selection:
+    TargetImage|endswith: '\lsass.exe'
+    GrantedAccess|contains: '0x1010'
+  condition: selection
+level: high
+tags:
+  - attack.credential_access
+  - attack.t1003.001

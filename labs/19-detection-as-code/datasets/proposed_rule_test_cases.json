@@ -1,0 +1,20 @@
+[
+  {
+    "test_id": "TC-01",
+    "rule_id": "test-rule-01",
+    "expected_verdict": "MALICIOUS",
+    "event": {
+      "Image": "powershell.exe",
+      "CommandLine": "-enc JAB..."
+    }
+  },
+  {
+    "test_id": "TC-02",
+    "rule_id": "test-rule-01",
+    "expected_verdict": "BENIGN",
+    "event": {
+      "Image": "powershell.exe",
+      "CommandLine": "Get-Process"
+    }
+  }
+]

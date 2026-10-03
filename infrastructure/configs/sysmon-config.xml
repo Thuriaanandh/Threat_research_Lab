@@ -1,0 +1,41 @@
+<!-- Sysmon High-Fidelity Threat Hunting Configuration -->
+<Sysmon schemaversion="4.90">
+  <HashAlgorithms>md5,sha256,imphash</HashAlgorithms>
+  <EventFiltering>
+    <!-- Event ID 1: Process Creation -->
+    <RuleGroup name="ProcessCreation" groupRelation="or">
+      <ProcessCreate onmatch="include">
+        <Image condition="image">powershell.exe</Image>
+        <Image condition="image">pwsh.exe</Image>
+        <Image condition="image">cmd.exe</Image>
+        <Image condition="image">wmic.exe</Image>
+        <Image condition="image">certutil.exe</Image>
+        <Image condition="image">rundll32.exe</Image>
+        <Image condition="image">regsvr32.exe</Image>
+        <Image condition="image">mshta.exe</Image>
+        <Image condition="image">bitsadmin.exe</Image>
+        <Image condition="image">cscript.exe</Image>
+        <Image condition="image">wscript.exe</Image>
+      </ProcessCreate>
+    </RuleGroup>
+
+    <!-- Event ID 10: ProcessAccess (LSASS Credential Access) -->
+    <RuleGroup name="ProcessAccess" groupRelation="or">
+      <ProcessAccess onmatch="include">
+        <TargetImage condition="end with">\lsass.exe</TargetImage>
+      </ProcessAccess>
+    </RuleGroup>
+
+    <!-- Event ID 11: FileCreate -->
+    <RuleGroup name="FileCreate" groupRelation="or">
+      <FileCreate onmatch="include">
+        <TargetFilename condition="contains">\AppData\Local\Temp\</TargetFilename>
+        <TargetFilename condition="contains">\ProgramData\</TargetFilename>
+        <TargetFilename condition="end with">.vbs</TargetFilename>
+        <TargetFilename condition="end with">.ps1</TargetFilename>
+        <TargetFilename condition="end with">.exe</TargetFilename>
+        <TargetFilename condition="end with">.dll</TargetFilename>
+      </FileCreate>
+    </RuleGroup>
+  </EventFiltering>
+</Sysmon>

@@ -1,0 +1,20 @@
+title: AWS Console Login Without MFA Followed by Key Creation
+id: e49102ba-4910-410a-8912-7819ab384102
+status: production
+description: Detects AWS Console login without MFA that generates new IAM access keys within 15 minutes.
+author: Threat Research Lab
+date: 2026-10-03
+logsource:
+  product: aws
+  service: cloudtrail
+detection:
+  selection_login:
+    eventName: 'ConsoleLogin'
+    additionalEventData.MFAUsed: 'No'
+  selection_key:
+    eventName: 'CreateAccessKey'
+  condition: selection_login and selection_key
+level: high
+tags:
+  - attack.persistence
+  - attack.t1098.001

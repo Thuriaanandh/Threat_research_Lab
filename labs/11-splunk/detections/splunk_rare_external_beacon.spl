@@ -1,0 +1,2 @@
+index=network sourcetype=zeek:conn id_resp_h!="10.*"
+| stats count by id_resp_h | where count < 5

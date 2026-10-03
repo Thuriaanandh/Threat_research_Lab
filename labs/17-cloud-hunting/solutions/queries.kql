@@ -1,0 +1,3 @@
+AWSCloudTrail
+| where EventName == "ConsoleLogin" and AdditionalEventData.MFAUsed == "No"
+| join kind=inner (AWSCloudTrail | where EventName == "CreateAccessKey") on UserIdentityUserName

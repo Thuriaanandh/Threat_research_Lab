@@ -1,0 +1,21 @@
+title: Zscaler Malware Download Followed by ZPA Unauthorized Access
+id: d78102ba-4910-410a-8912-7819ab230199
+status: production
+description: Correlates a ZIA Cloud Sandbox malware detection with subsequent ZPA lateral movement access denials for the same identity.
+author: Threat Research Lab
+date: 2026-10-03
+logsource:
+  product: zscaler
+  service: proxy
+detection:
+  selection_zia:
+    log_type: 'ZIA'
+    action: 'Blocked'
+  selection_zpa:
+    log_type: 'ZPA'
+    action: 'Denied'
+  condition: selection_zia and selection_zpa
+level: critical
+tags:
+  - attack.lateral_movement
+  - attack.t1021

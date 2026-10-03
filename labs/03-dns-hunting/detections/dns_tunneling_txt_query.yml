@@ -1,0 +1,20 @@
+title: DNS TXT Query Tunneling Detection
+id: 5612ba81-a189-49be-8b83-e189d2719a84
+status: production
+description: Detects unusually long DNS TXT queries characteristic of data exfiltration and tunneling.
+author: Threat Research Lab
+date: 2026-10-03
+logsource:
+  category: dns_query
+  product: windows
+detection:
+  selection:
+    QueryType: 'TXT'
+    QueryName|contains:
+      - 'tunnel'
+      - 'c2server'
+  condition: selection
+level: high
+tags:
+  - attack.exfiltration
+  - attack.t1071.004

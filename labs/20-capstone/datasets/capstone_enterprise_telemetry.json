@@ -1,0 +1,57 @@
+[
+  {
+    "ts": "2026-10-03T02:10:00Z",
+    "source": "Email",
+    "action": "Delivered",
+    "subject": "Urgent Invoice Q3",
+    "attachment": "invoice_2026.docm",
+    "recipient": "cfo@corp.com"
+  },
+  {
+    "ts": "2026-10-03T02:14:15Z",
+    "source": "Sysmon_EID_1",
+    "host": "WS-EXEC-01",
+    "parent": "WINWORD.EXE",
+    "image": "powershell.exe",
+    "cli": "powershell.exe -w hidden -enc JABjAGwAaQ..."
+  },
+  {
+    "ts": "2026-10-03T02:15:00Z",
+    "source": "Sysmon_EID_10",
+    "host": "WS-EXEC-01",
+    "source_img": "powershell.exe",
+    "target_img": "lsass.exe",
+    "access": "0x1010"
+  },
+  {
+    "ts": "2026-10-03T02:16:30Z",
+    "source": "Security_4624",
+    "host": "SRV-DC-01",
+    "user": "DomainAdmin_SVC",
+    "logon_type": 3,
+    "src_ip": "10.0.1.15"
+  },
+  {
+    "ts": "2026-10-03T02:18:00Z",
+    "source": "Sysmon_EID_22",
+    "host": "WS-EXEC-01",
+    "query": "dGVzdC1jMmJlYWNvbg==.system-core-update.net",
+    "type": "TXT"
+  },
+  {
+    "ts": "2026-10-03T02:22:00Z",
+    "source": "CloudTrail",
+    "event": "ConsoleLogin",
+    "user": "aws-admin-backup",
+    "src_ip": "198.51.100.99",
+    "mfa": "No"
+  },
+  {
+    "ts": "2026-10-03T02:25:00Z",
+    "source": "CloudTrail",
+    "event": "GetObject",
+    "user": "aws-admin-backup",
+    "bucket": "corp-financial-records-2026",
+    "key": "q3_ledger.csv"
+  }
+]

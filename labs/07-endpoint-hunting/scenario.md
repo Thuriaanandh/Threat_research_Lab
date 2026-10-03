@@ -1,0 +1,2 @@
+# Scenario: The Chameleon Process
+Endpoint detection alarms reported zero malware hashes on executive laptop WS-EXEC-03. However, memory forensic alerts noticed rundll32.exe communicating with an offshore IP address. EDR process lineage lists explorer.exe as the parent of rundll32.exe. Yet, detailed kernel telemetry indicates an anomalous process creation timestamp mismatch and an Alternate Data Stream execution path.

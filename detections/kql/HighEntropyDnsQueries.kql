@@ -1,0 +1,7 @@
+// High Entropy DNS Queries (Covert Channel / Tunneling)
+DnsEvents
+| extend DomainLength = strlen(Name)
+| where DomainLength > 30
+| summarize QueryCount = count() by ClientIP, Name, bin(TimeGenerated, 5m)
+| where QueryCount > 10
+| sort by QueryCount desc

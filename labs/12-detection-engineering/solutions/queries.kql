@@ -1,0 +1,2 @@
+DeviceProcessEvents
+| where FileName =~ "rundll32.exe" and ProcessCommandLine has_any ("javascript:", "vbscript:")

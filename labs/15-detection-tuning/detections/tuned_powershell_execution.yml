@@ -1,0 +1,28 @@
+title: Tuned Suspicious PowerShell Execution
+id: 591280ba-4819-410a-9812-7819ab230491
+status: production
+description: High-fidelity detection for suspicious PowerShell execution with enterprise administrative suppression.
+author: Threat Research Lab
+date: 2026-10-03
+logsource:
+  category: process_creation
+  product: windows
+detection:
+  selection:
+    Image|endswith: '\powershell.exe'
+  suspicious_context:
+    ParentImage|endswith:
+      - '\winword.exe'
+      - '\excel.exe'
+    CommandLine|contains:
+      - '-enc'
+      - '-w hidden'
+  filter_sccm:
+    ParentImage|endswith: '\CcmExec.exe'
+  filter_health:
+    CommandLine|contains: 'HealthCheck'
+  condition: selection and suspicious_context and not (filter_sccm or filter_health)
+level: high
+tags:
+  - attack.execution
+  - attack.t1059.001

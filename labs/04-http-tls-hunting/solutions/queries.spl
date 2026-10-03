@@ -1,0 +1,4 @@
+# Splunk Query for Rare JA3 and Suspicious User-Agents
+index=proxy sourcetype="proxy:tls"
+| stats count by user_agent, ja3, cert_issuer, dest_ip
+| where count < 10

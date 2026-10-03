@@ -1,0 +1,36 @@
+version: '3.8'
+
+services:
+  # Containerized Threat Hunting Workbench (JupyterLab + DuckDB + Security Tools)
+  hunt-workbench:
+    image: python:3.11-slim
+    container_name: hunt-workbench
+    restart: unless-stopped
+    ports:
+      - "8888:8888"
+    environment:
+      - JUPYTER_ENABLE_LAB=yes
+      - JUPYTER_TOKEN=threat-research-2026
+    volumes:
+      - ../../:/workspace
+    working_dir: /workspace
+    command: >
+      bash -c "pip install --no-cache-dir jupyterlab pandas duckdb pyyaml rich requests scapy &&
+               jupyter lab --ip=0.0.0.0 --port=8888 --no-browser --allow-root"
+
+  # Lightweight Mock SIEM / Log Explorer (Splunk Enterprise Mock or OpenSearch)
+  log-indexer:
+    image: opensearchproject/opensearch:2.12.0
+    container_name: lab-log-indexer
+    restart: unless-stopped
+    environment:
+      - discovery.type=single-node
+      - plugins.security.disabled=true
+      - "OPENSEARCH_JAVA_OPTS=-Xms512m -Xmx512m"
+    ports:
+      - "9200:9200"
+    volumes:
+      - opensearch-data:/usr/share/opensearch/data
+
+volumes:
+  opensearch-data:

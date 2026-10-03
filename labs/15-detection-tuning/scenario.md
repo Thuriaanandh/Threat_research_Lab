@@ -1,0 +1,2 @@
+# Scenario: Taming the Alert Storm
+A novice analyst deployed the rule: "Alert whenever powershell.exe executes". In an enterprise of 5,000 endpoints, this rule generated 4,800 alerts in 24 hours, completely burying the SOC. You must analyze the 5,000-event dataset, baseline legitimate activity (SCCM, developer tooling, health checks), isolate the 12 malicious events, add contextual suppression filters, and reduce the false-positive rate from 96% to under 1%.

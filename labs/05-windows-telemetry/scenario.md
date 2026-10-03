@@ -1,0 +1,2 @@
+# Scenario: The Macro Cradle
+At 14:00 UTC on October 3, 2026, an employee in the Finance department opened an email attachment titled Quarterly_Audit_Report.docm. Shortly thereafter, the workstation began demonstrating anomalous process creation sequences. Sysmon events indicate that Microsoft Word spawned an unexpected scripting shell, followed by file creation in C:\ProgramData\, access into lsass.exe, and the registration of a new scheduled task.

@@ -1,0 +1,6 @@
+// Office Spawning PowerShell
+DeviceProcessEvents
+| where InitiatingProcessFileName has_any ("winword.exe", "excel.exe", "powerpnt.exe")
+| where FileName in~ ("powershell.exe", "pwsh.exe")
+| project Timestamp, DeviceName, AccountName, InitiatingProcessFileName, InitiatingProcessCommandLine, FileName, ProcessCommandLine
+| sort by Timestamp desc

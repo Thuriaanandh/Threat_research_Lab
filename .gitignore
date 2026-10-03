@@ -1,0 +1,36 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+*.pcapng
+*.raw
+
+# Virtual Environments
+venv/
+env/
+ENV/
+.venv/
+
+# Environment Variables & Secrets
+.env
+*.pem
+*.key
+*.token
+credentials.json
+
+# IDE and Editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Testing and Coverage
+.coverage
+htmlcov/
+.pytest_cache/
+
+# Large dataset raw downloads
+datasets/raw/
+*.iso
+*.vmdk
+*.vmem

@@ -1,0 +1,3 @@
+DeviceProcessEvents
+| where FileName in~ ("netsh.exe", "ntdsutil.exe")
+| where ProcessCommandLine has_any ("portproxy", "ifm")

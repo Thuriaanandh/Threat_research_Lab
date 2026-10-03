@@ -1,0 +1,33 @@
+title: Suspicious LSASS Process Access for Credential Extraction
+id: e3165b4f-8ca4-41d6-b072-f67f2f1e29da
+status: production
+description: Detects suspicious process access requests targeting lsass.exe, indicating potential credential dumping via MiniDumpWriteDump or direct memory reading.
+references:
+  - https://attack.mitre.org/techniques/T1003/001/
+author: Threat Research Lab
+date: 2026-10-03
+logsource:
+  category: process_access
+  product: windows
+detection:
+  selection_target:
+    TargetImage|endswith: '\lsass.exe'
+  selection_rights:
+    GrantedAccess|contains:
+      - '0x1010'
+      - '0x1038'
+      - '0x1438'
+      - '0x1410'
+      - '0x1F0FFF'
+  filter_legitimate:
+    SourceImage|endswith:
+      - '\svchost.exe'
+      - '\csrss.exe'
+      - '\MsMpEng.exe'
+  condition: selection_target and selection_rights and not filter_legitimate
+falsepositives:
+  - Antivirus and EDR agents inspecting system processes.
+level: high
+tags:
+  - attack.credential_access
+  - attack.t1003.001

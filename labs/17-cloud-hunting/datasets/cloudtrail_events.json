@@ -1,0 +1,41 @@
+[
+  {
+    "eventTime": "2026-10-03T18:00:00Z",
+    "eventName": "ConsoleLogin",
+    "userIdentity": {
+      "type": "IAMUser",
+      "userName": "dev-intern"
+    },
+    "sourceIPAddress": "198.51.100.88",
+    "additionalEventData": {
+      "MFAUsed": "No"
+    }
+  },
+  {
+    "eventTime": "2026-10-03T18:05:00Z",
+    "eventName": "CreateAccessKey",
+    "userIdentity": {
+      "type": "IAMUser",
+      "userName": "dev-intern"
+    },
+    "sourceIPAddress": "198.51.100.88",
+    "responseElements": {
+      "accessKey": {
+        "accessKeyId": "AKIAIOSFODNN7EXAMPLE"
+      }
+    }
+  },
+  {
+    "eventTime": "2026-10-03T18:10:00Z",
+    "eventName": "GetObject",
+    "userIdentity": {
+      "type": "IAMUser",
+      "userName": "dev-intern"
+    },
+    "sourceIPAddress": "198.51.100.88",
+    "requestParameters": {
+      "bucketName": "corp-finance-q3-2026",
+      "key": "salaries.xlsx"
+    }
+  }
+]

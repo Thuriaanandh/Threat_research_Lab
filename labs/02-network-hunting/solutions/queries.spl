@@ -1,0 +1,10 @@
+# Splunk Query for Port Scanning
+index=network sourcetype="zeek:conn" id_orig_h="192.168.10.45"
+| stats dc(id_resp_p) as distinct_ports, values(id_resp_p) as ports by id_orig_h, id_resp_h
+| where distinct_ports > 10
+
+# Splunk Query for SMB Brute Force
+index=network sourcetype="zeek:conn" id_resp_p=445
+| bin _time span=10s
+| stats count by _time, id_orig_h, id_resp_h
+| where count > 15

@@ -1,0 +1,3 @@
+// KQL translation of Sigma Rule 1
+DeviceProcessEvents
+| where FileName in~ ("powershell.exe", "pwsh.exe") and ProcessCommandLine has_any ("-enc", "-EncodedCommand")

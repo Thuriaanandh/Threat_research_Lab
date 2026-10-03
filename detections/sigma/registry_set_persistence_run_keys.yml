@@ -1,0 +1,31 @@
+title: Suspicious Persistence Modification via Registry Run Key
+id: a891f341-32ef-42f8-9dc9-4672bb192a54
+status: production
+description: Detects modifications to Windows Registry Run keys commonly used by malware for persistence across reboots.
+references:
+  - https://attack.mitre.org/techniques/T1547/001/
+author: Threat Research Lab
+date: 2026-10-03
+logsource:
+  category: registry_set
+  product: windows
+detection:
+  selection_key:
+    TargetObject|contains:
+      - '\CurrentVersion\Run\'
+      - '\CurrentVersion\RunOnce\'
+  selection_suspicious_values:
+    Details|contains:
+      - 'powershell'
+      - 'cmd.exe'
+      - 'wscript'
+      - 'cscript'
+      - 'AppData'
+      - 'ProgramData'
+  condition: selection_key and selection_suspicious_values
+falsepositives:
+  - Legitimate third-party software updates executing from user space (inspect vendor digital signatures).
+level: high
+tags:
+  - attack.persistence
+  - attack.t1547.001

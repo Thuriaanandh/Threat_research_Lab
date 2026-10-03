@@ -1,0 +1,6 @@
+timestamp,client_ip,query_name,query_type,rcode,answers,entropy
+2026-10-03T10:00:01Z,192.168.10.45,www.microsoft.com,A,NOERROR,20.112.52.29,2.81
+2026-10-03T10:00:05Z,192.168.10.45,api.github.com,A,NOERROR,140.82.121.6,2.95
+2026-10-03T10:01:12Z,192.168.10.45,dGVzdC1kYXRhLWV4ZmlsdHJhdGlvbi1zZXNzaW9u.tunnel.c2server.org,TXT,NOERROR,dGhpcy1pcy1hLWJlYWNvbg==,4.68
+2026-10-03T10:01:15Z,192.168.10.45,cGFzc3dvcmQtZHJvcC11c2VyLWpkb2U=.tunnel.c2server.org,TXT,NOERROR,Y29uZmlybWVk,4.82
+2026-10-03T10:02:20Z,192.168.10.45,xj93kdfm93kdls93.dga-net.xyz,A,NXDOMAIN,,4.12

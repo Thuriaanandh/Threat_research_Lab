@@ -1,0 +1,64 @@
+# 15 Production Splunk SPL Hunting Queries
+# 1. Failed Auth Volume
+index=auth sourcetype="WinEventLog:Security" EventCode=4625
+| stats count by user, host | where count > 10
+
+# 2. Password Spraying
+index=auth sourcetype="WinEventLog:Security" EventCode=4625
+| stats dc(user) as targeted_users by src_ip | where targeted_users > 10
+
+# 3. Rex Regex Extraction
+index=endpoint sourcetype="XmlWinEventLog:Sysmon" EventCode=1
+| rex field=CommandLine "-(?:enc|EncodedCommand)\s+(?<encoded_str>[A-Za-z0-9+/=]+)"
+| table _time, host, user, encoded_str
+
+# 4. Long Command Line Anomaly
+index=endpoint sourcetype="XmlWinEventLog:Sysmon" EventCode=1
+| eval cmd_len = len(CommandLine)
+| where cmd_len > 500
+| table _time, host, Image, cmd_len, CommandLine
+
+# 5. Rare External Destinations
+index=network sourcetype="zeek:conn" id_resp_h!="10.*"
+| stats count by id_resp_h | where count < 5
+
+# 6. Delta Beaconing Analysis
+index=network sourcetype="zeek:conn"
+| sort 0 id_orig_h, id_resp_h, _time
+| streamstats current=f window=1 last(_time) as prev_time by id_orig_h, id_resp_h
+| eval delta = _time - prev_time
+| stats count avg(delta) as avg_interval var(delta) as variance by id_orig_h, id_resp_h
+| where count > 30 AND variance < 2
+
+# 7. Threat Intel Lookup Enrichment
+index=proxy | lookup threat_feed.csv ip AS dest_ip OUTPUT threat_score, category
+| where threat_score > 70
+
+# 8. Windows 4688 Command Auditing
+index=security EventCode=4688 NewProcessName="*\cmd.exe"
+| stats count by ProcessCommandLine, Computer
+
+# 9. Base64 Encoded CLI Detection
+index=endpoint (CommandLine="* -enc *" OR CommandLine="* -EncodedCommand *")
+
+# 10. Privilege Escalation Transaction
+index=security EventCode IN (4624, 4672)
+| transaction user host maxspan=30s
+| table _time, user, host, duration
+
+# 11. Timechart Anomaly Baseline
+index=network sourcetype="proxy"
+| timechart span=1h count
+| eval hour = strftime(_time, "%H")
+
+# 12. Scheduled Task Creation
+index=security EventCode=4698 | table _time, Computer, TaskName, TaskContent
+
+# 13. Linux Sudo Anomalies
+index=linux sourcetype="auditd" comm="sudo" | stats count by user, a2
+
+# 14. Rare User-Agent Strings
+index=proxy | stats count by user_agent | where count < 3
+
+# 15. Large Egress Volume
+index=proxy | eval mb_out = bytes_out / 1024 / 1024 | where mb_out > 50

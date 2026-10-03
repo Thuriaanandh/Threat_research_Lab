@@ -1,0 +1,2 @@
+# Scenario: Deconstructing Volt Typhoon
+Analyze CISA Advisory AA23-140A regarding Chinese state-sponsored actor Volt Typhoon operating in US critical infrastructure. The actor relies almost exclusively on Living-off-the-Land (LOTL) techniques including wmic, netsh, and ntdsutil. You must categorize intelligence statements into Fact, Analysis, and Hypothesis, construct a Diamond Model, and translate the adversary dossier into actionable threat-hunting queries.

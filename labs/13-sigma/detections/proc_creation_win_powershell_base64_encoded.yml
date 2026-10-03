@@ -1,0 +1,22 @@
+title: PowerShell Base64 Encoded Command Execution
+id: c7e1f42a-9214-41e9-9a7f-d8904719602a
+status: production
+description: Detects execution of PowerShell with encoded parameters.
+author: Threat Research Lab
+date: 2026-10-03
+logsource:
+  category: process_creation
+  product: windows
+detection:
+  selection_image:
+    Image|endswith: '\powershell.exe'
+  selection_args:
+    CommandLine|contains:
+      - ' -e '
+      - ' -enc '
+      - ' -encodedcommand '
+  condition: selection_image and selection_args
+level: medium
+tags:
+  - attack.execution
+  - attack.t1059.001

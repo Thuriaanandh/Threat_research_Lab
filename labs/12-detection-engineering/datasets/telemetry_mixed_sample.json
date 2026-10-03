@@ -1,0 +1,14 @@
+[
+  {
+    "id": 1,
+    "type": "benign",
+    "Image": "C:\\Windows\\System32\\svchost.exe",
+    "CommandLine": "svchost.exe -k netsvcs"
+  },
+  {
+    "id": 2,
+    "type": "malicious",
+    "Image": "C:\\Windows\\System32\\rundll32.exe",
+    "CommandLine": "rundll32.exe javascript:\"..\""
+  }
+]

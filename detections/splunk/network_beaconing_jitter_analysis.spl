@@ -1,0 +1,9 @@
+# Outbound Network Beaconing Detection via Delta Analysis
+index=network sourcetype="zeek:conn" id_resp_h!="10.*" id_resp_h!="192.168.*"
+| sort 0 id_orig_h, id_resp_h, _time
+| streamstats current=f window=1 last(_time) as prev_time by id_orig_h, id_resp_h
+| eval delta_time=_time-prev_time
+| where isnotnull(delta_time)
+| stats count avg(delta_time) as avg_interval var(delta_time) as variance_interval by id_orig_h, id_resp_h, id_resp_p
+| where count > 50 AND variance_interval < 5
+| sort - count
